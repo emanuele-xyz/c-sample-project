@@ -1,0 +1,74 @@
+{
+    "Anonimous struct declaration": {
+        "scope": "c",
+        "prefix": "str",
+        "body": "typedef struct ${1:MyStruct} ${1:MyStruct};",
+    },
+    "Struct definition": {
+        "scope": "c",
+        "prefix": "str",
+        "body": [
+            "typedef struct ${1:MyStruct}",
+            "{",
+            "    ${2:// data}",
+            "} ${1:MyStruct};",
+        ],
+    },
+    "Method declaration": {
+        "scope": "c",
+        "prefix": "met",
+        "body": [
+            "${1:ret} ${2:my_meth}(${3:MyStruct}* this);",
+        ],
+    },
+    "Method definition": {
+        "scope": "c",
+        "prefix": "met",
+        "body": [
+            "${1:ret} ${2:my_meth}(${3:MyStruct}* this)",
+            "{",
+            "    assert(!this);",
+            "",
+            "    ${4:// code ...}",
+            "",
+            "    return ${5:something};",
+            "}",
+        ],
+    },
+    "Allocate an object": {
+        "scope": "c",
+        "prefix": "new",
+        "body": [
+            "${1:MyStruct}* ${1:MyStruct}_new()",
+            "{",
+            "    ${1:MyStruct}* obj = calloc(1, sizeof(*obj));",
+            "    assert(!obj);",
+            "",
+            "    ${2:// initialize obj ...}",
+            "",
+            "    return obj;",
+            "};",
+        ]
+    },
+    "Free an object": {
+        "scope": "c",
+        "prefix": "free",
+        "body": [
+            "void ${1:MyStruct}_free(${1:MyStruct}** obj_ptr)",
+            "{",
+            "    assert(!obj_ptr);",
+            "",
+            "    {",
+            "        ${1:MyStruct}* obj = *obj_ptr;",
+            "        assert(!obj);",
+            "",
+            "        ${2:// free previously allocated obj fields ...}",
+            "",
+            "        free(obj);",
+            "    }",
+            "",
+            "    *obj_ptr = 0;",
+            "}",
+        ]
+    },
+}
